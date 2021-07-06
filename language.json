@@ -1,0 +1,6 @@
+{
+    "LOGGED": "Successfully logged.",
+    "ERROR_INVALID_TOKEN": "Invalid token provided.",
+    "ERROR_CHANNEL_ID": "There is no channel with this ID.",
+    "ERROR_GUILD_ID": "There is no guild with this ID."
+}

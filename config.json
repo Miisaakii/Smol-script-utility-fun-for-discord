@@ -1,7 +1,8 @@
 {
-    "TOKEN": "",
+    "TOKEN": "NzE2MjU3NDM2MzU2MzEzMTQ5.YOTpdQ.iZbcUCnywXQqCyiyaZpFA-xK6xQ",
     
     "AUTO_VOCAL": "off",
     "AUTO_AFK": "off",
-    "ANTI_INVITE": "off"
+    "ANTI_INVITE": "off",
+    "AUTO_SPOILER": "on"
 }

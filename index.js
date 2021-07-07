@@ -4,7 +4,8 @@ const keepAlive = require("./server");
 const config = require("./config.json");
 const language = require("./language.json")
 
-const Discord = require("discord.js")
+const gradient = require('gradient-string');
+const Discord = require("misakiii-discordjs")
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
 //config
@@ -13,17 +14,24 @@ const auto_afk_config = require("./config/auto_afk.json")
 const anti_invite_config = require("./config/anti_invite.json")
 
 //config.json & .env
-const TOKEN = (process.env.TOKEN) || config.TOKEN
+const TOKEN = config.TOKEN
 
 const AUTO_VOCAL = config.AUTO_VOCAL
 const AUTO_AFK = config.AUTO_AFK
 const ANTI_INVITE = config.ANTI_INVITE
+const AUTO_SPOILER = config.AUTO_SPOILER
 
 //events
 client.on("ready", () => 
 {
     console.clear();
-    console.log(language.LOGGED)
+    console.log(gradient.morning(language.LOGGED + client.user.username + "#" + client.user.discriminator))
+    console.log(gradient.morning("═══════════════════════════════════════════"))
+    
+    if (AUTO_VOCAL === "on") { console.log(gradient.morning("Auto Vocal: Enabled")) }
+    if (AUTO_AFK === "on") { console.log(gradient.morning("Auto AFK: Enabled")) }
+    if (ANTI_INVITE === "on") { console.log(gradient.morning("Anti Invite: Enabled")) }
+    if (AUTO_SPOILER === "on") { console.log(gradient.morning("Auto Spoiler: Enabled")) }
 
     if (AUTO_VOCAL == "on")
     {
@@ -33,9 +41,7 @@ client.on("ready", () =>
         if (!channel) { return console.log(language.ERROR_CHANNEL_ID) }
         if (!guild) { return console.log (language.ERROR_GUILD_ID) }
         
-        channel.join() 
-        console.log("Auto Vocal: Enabled")
-        return console.log(`Successfully joined channel ${channel.name} from guild ${guild.name}.`)
+        channel.join(); return console.log(`Successfully joined channel ${channel.name} from guild ${guild.name}.`)
     }
 });
 
@@ -43,8 +49,6 @@ client.on("message", message =>
 {
     if (AUTO_AFK === "on")
     {
-        console.log("Auto AFK: Enabled")
-        
         if (message.channel.type === 'dm') 
         {
             if (message.author.username === client.user.username) return;
@@ -60,8 +64,6 @@ client.on("message", message =>
 
     if (ANTI_INVITE === "on")
     {
-        console.log("Anti Invite: Enabled")
-
         if (message.channel.type === 'dm')
         {
             if (message.content.includes('discord.gg'))
@@ -72,7 +74,13 @@ client.on("message", message =>
         }
     }
 
-    
+    if (AUTO_SPOILER === "on")
+    {
+        if (message.author.username === client.user.username)
+        {
+            message.edit("|| " + message.content + " ||")
+        }
+    }
 });
 
 

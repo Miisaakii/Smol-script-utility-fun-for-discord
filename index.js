@@ -1,3 +1,5 @@
+//Made by Misakiii
+
 const fs = require('fs');
 require('dotenv').config();
 const keepAlive = require("./server");
@@ -27,6 +29,11 @@ client.on("ready", () =>
     console.clear();
     console.log(gradient.morning(language.LOGGED + client.user.username + "#" + client.user.discriminator))
     console.log(gradient.morning("═══════════════════════════════════════════"))
+
+    if (AUTO_VOCAL === "off" && AUTO_AFK === "off" && ANTI_INVITE === "off" && AUTO_SPOILER === "off") 
+    { 
+        return console.log("\x1b[31m" + "Error, please enable one options in the file config.json") 
+    }
     
     if (AUTO_VOCAL === "on") { console.log(gradient.morning("Auto Vocal: Enabled")) }
     if (AUTO_AFK === "on") { console.log(gradient.morning("Auto AFK: Enabled")) }
